@@ -1,0 +1,11 @@
+.card {
+    background:white;
+    width: 300px;
+    height: 300px;
+   margin: auto;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
