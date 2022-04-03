@@ -1,11 +1,37 @@
 .card {
     background:white;
-    width: 300px;
-    height: 300px;
-   margin: auto;
+    width: 320px;
+    height: 350px;
+    margin: auto;
+    border-radius: 1rem;
+
 }
 
 .card ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
+
+.list button {
+    text-align: left;
+    font-size: 15px;
+    padding: 10px;
+    width: 250px;
+    margin:5px auto;
+    border-radius:10px;
+    outline: none;
+    border:#6066D0 solid 1px;
+    background: white;
+}
+
+.list button:hover {
+    background: yellow;
+}
+
+.card h2 {
+    text-align: center;
+    font-size: 24px;
+}
+
