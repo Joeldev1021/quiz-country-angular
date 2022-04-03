@@ -8,13 +8,31 @@ import { ServiceCountryService } from 'src/app/service/service-country.service';
 })
 
 export class ListItemComponent implements OnInit {
+   
+  constructor(public serviceCountry: ServiceCountryService) {
 
-  constructor(private serviceCountry: ServiceCountryService) {
    }
 
-
   ngOnInit(): void {
-  this.serviceCountry.getCountries().subscribe((res => console.log(res)))
+    this.getAllCountries();
   }
 
-}
+  getAllCountries() {
+    this.serviceCountry.getCountries().subscribe(
+      (res) => {
+        this.serviceCountry.countries = res
+        this.getRandomCountry()
+      },
+      (err) => console.log(err)
+    );
+  }
+   
+   getCurrentCountry() {
+      this.serviceCountry.singleCountry = this.serviceCountry.getSingleRandomNumber()  
+   }
+   getRandomCountry() {
+    this.serviceCountry.generateRandomNumbers().map(n => {
+     this.serviceCountry.arrCountry.push(this.serviceCountry.countries[n])
+    })
+   }
+} 
