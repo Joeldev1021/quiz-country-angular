@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ServiceCountryService {
-  countries:any[] = []
   randomNumber:number = 0;
-  singleCountry:any;
   arrCountry:any[] = [];
   arrNumber:number[] = new Array(4);
   COUNTRY_URL = 'https://restcountries.com/v2/all';
 
   constructor(private http: HttpClient) {
-      
-   }
 
-    getCountries() {
+   }
+   
+    getCountries(): Observable<any> {
       return this.http.get<any[]>(this.COUNTRY_URL);
     }
 
@@ -36,7 +35,7 @@ export class ServiceCountryService {
       }
       return this.arrNumber;
     }
-
+    
     getSingleRandomNumber() {
      return Math.floor(Math.random() * 4) 
     }
