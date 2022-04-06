@@ -1,1 +1,8 @@
-<p>list-item works </p>
+<ul class="list">
+  {{text}}
+  <li *ngFor="let item of serviceCountry.arrCountry">
+    <button (click)="onSelect(item.name)">
+      {{ item.name }}
+    </button>
+  </li>
+</ul>

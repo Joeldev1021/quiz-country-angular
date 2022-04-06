@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ServiceCountryService } from 'src/app/service/service-country.service';
 
 @Component({
@@ -7,32 +7,12 @@ import { ServiceCountryService } from 'src/app/service/service-country.service';
   styleUrls: ['./list-item.component.css']
 })
 
-export class ListItemComponent implements OnInit {
+export class ListItemComponent  {
+
+  constructor(public serviceCountry: ServiceCountryService) {}
+  
    
-  constructor(public serviceCountry: ServiceCountryService) {
-
-   }
-
-  ngOnInit(): void {
-    this.getAllCountries();
+  onSelect(n: string) {
+    console.log(n)
   }
-
-  getAllCountries() {
-    this.serviceCountry.getCountries().subscribe(
-      (res) => {
-        this.serviceCountry.countries = res
-        this.getRandomCountry()
-      },
-      (err) => console.log(err)
-    );
-  }
-   
-   getCurrentCountry() {
-      this.serviceCountry.singleCountry = this.serviceCountry.getSingleRandomNumber()  
-   }
-   getRandomCountry() {
-    this.serviceCountry.generateRandomNumbers().map(n => {
-     this.serviceCountry.arrCountry.push(this.serviceCountry.countries[n])
-    })
-   }
 } 
