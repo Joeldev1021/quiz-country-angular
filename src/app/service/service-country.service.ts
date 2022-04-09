@@ -8,18 +8,15 @@ import { Observable } from 'rxjs';
 
 export class ServiceCountryService {
   randomNumber:number = 0;
-  arrCountry:any[] = [];
-  arrNumber:number[] = new Array(4);
-  COUNTRY_URL = 'https://restcountries.com/v2/all';
+  arrNumber:number[] = [];
+  newArr: any[] = [];
+  private COUNTRY_URL = 'https://restcountries.com/v2/all';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
 
-   }
-   
-    getCountries(): Observable<any> {
-      return this.http.get<any[]>(this.COUNTRY_URL);
+   getCountries(): Observable<any> {
+      return this.http.get<any[]>(this.COUNTRY_URL)
     }
-
     getRandomNumber() {
       /* random number 0 to 249 */
       return Math.floor(Math.random() * 250);
@@ -34,6 +31,10 @@ export class ServiceCountryService {
         }
       }
       return this.arrNumber;
+    }
+
+    getCountriesByRandomNumber(countries: any) {
+      console.log(countries)
     }
     
     getSingleRandomNumber() {
