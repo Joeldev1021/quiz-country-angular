@@ -33,9 +33,6 @@ export class ServiceCountryService {
       return this.arrNumber;
     }
 
-    getCountriesByRandomNumber(countries: any) {
-      console.log(countries)
-    }
     
     getSingleRandomNumber() {
      return Math.floor(Math.random() * 4) 
