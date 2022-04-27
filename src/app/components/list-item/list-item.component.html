@@ -1,8 +1,17 @@
-<ul class="list">
-  {{text}}
-  <li *ngFor="let item of serviceCountry.arrCountry">
-    <button (click)="onSelect(item.name)">
-      {{ item.name }}
-    </button>
-  </li>
-</ul>
+<div
+  class="list"
+  (click)="handleClick(currentCountry.name, this.listItem.name)"
+  [ngStyle]="{
+    'background-color': isTrue !== null && this.isSelect,
+    color: isTrue !== null && 'white'
+  }"
+  [ngStyle]="{
+    'background-color': count > 0 && currentCountry.name === this.listItem.name ? '#60BF88' : '',
+    'color': count > 0 && currentCountry.name === this.listItem.name ? 'white' : ''
+  }"
+>
+  <p>{{ this.letterArr[index] }}</p>
+  <p>{{ this.listItem.name }}</p>
+ <i *ngIf="isTrue !== null && !isTrue" class="fa-regular fa-circle-xmark"></i>
+ <i *ngIf="isTrue" class="fa-regular fa-circle-check"></i>
+</div>
