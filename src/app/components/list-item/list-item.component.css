@@ -4,7 +4,7 @@
     font-size: 15px;
     width: 290px;
     height: 40px;
-    margin:5px auto;
+    margin:10px auto;
     border-radius:10px;
     border:#6066D0 solid 1px;
     color:#4248b9;
@@ -26,4 +26,14 @@
 .list i {
     position:absolute;
     right:20px; 
+}
+
+.list.selected-correct {
+    background: #60BF88;
+    color:white;
+}
+
+.list.selected-incorrect {
+    background: #EA8282;
+    color:white;
 }
