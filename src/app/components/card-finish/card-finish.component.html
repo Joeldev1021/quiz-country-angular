@@ -1,0 +1,8 @@
+<div *ngIf="countAnswer" class="card-finish">
+  <div class="card-finish-img">
+    <img src="assets/undraw_winners.svg" alt="alt" />
+  </div>
+  <p class="finish-title">Results</p>
+  <p class="finish-result">You got <span>{{correctAnswer}}</span> correct answers</p>
+  <button (click)="btnTryAgain()" class="btn-try-again">Try again</button>
+</div>
