@@ -1,34 +1,36 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ServiceCountryService } from 'src/app/service/service-country.service';
 
 @Component({
   selector: 'app-list-item',
   templateUrl: './list-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./list-item.component.css']
 })
 
 export class ListItemComponent {
+  @Output() addNewQuizEvent = new EventEmitter();
   @Input() listItem: any;
-  @Input() color!: string;
   @Input() currentCountry: any ;
-  @Input() count!: number;
+  @Input() countSelect!: number;
   @Input() index:number = 0
+  @Input() correctAnswer!:number;
+
    letterArr: string[] = ['A', 'B', 'C', 'D']
    isTrue:boolean | null = null; 
-   isSelect:string = '';
-
 
   constructor(public serviceCountry: ServiceCountryService) {}
 
    
-  handleClick(currentCountry:any, listItem:any) {
-    if(this.count > 0) return alert('next quiz country')
-    if(currentCountry == listItem){
+  handleClick(currentCountry:string, listItem:string) {
+    if(this.countSelect > 0) return alert('next quiz country')
+    this.countSelect++;
+    if(currentCountry === listItem){
       this.isTrue = true;
-      this.isSelect = '#60BF88'
+      this.addNewQuizEvent.emit(this.isTrue);
     }else {
       this.isTrue = false;
-      this.isSelect = '#EA8282'
+      this.addNewQuizEvent.emit();
     }
   }
 } 
