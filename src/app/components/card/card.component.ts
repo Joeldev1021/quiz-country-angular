@@ -9,11 +9,13 @@ import {ServiceCountryService} from "../../service/service-country.service";
 
 export class CardComponent implements OnInit {
   countries: any[] = [];
-  randomNumbers: number[] = [];
   countriesList: any[] = []; 
   currentCountry: any  = "";
-  singleNumber: number = 0;
-  count:number = 0;
+  countSelect:number = 0;
+  countAnswer:number = 1;
+  arrQuiz:string[] = [' is the capital of', 'Which country does this flag belong to?']
+  currentQuiz: string = this.arrQuiz[0];
+  correctAnswer:number = 0;
 
   constructor(public serviceCountry: ServiceCountryService) {
   }
@@ -22,34 +24,51 @@ export class CardComponent implements OnInit {
     this.serviceCountry.getCountries().subscribe((data) => {
       this.countries = data;
     } );
-    this.randomNumbers = this.serviceCountry.generateRandomNumbers();
-    this.singleNumber = this.serviceCountry.getSingleRandomNumber();
+    if(this.countries.length > 0) {
+      this.getCountriesByRandomNumber();
+    }
   }
 
-  ngAfterViewInit() {
+ ngAfterViewInit() {
     setTimeout(() => {
     this.getCountriesByRandomNumber()
     }, 1000);
   }
-
+  
   getCountriesByRandomNumber() {
-    this.randomNumbers.map(i => {
-      this.countriesList.push(this.countries[i]);
-      console.log(this.countriesList)
+    this.serviceCountry.generateRandomNumbers().map(i => {
+      this.countriesList.push(this.countries[i])
     })
-   this.currentCountry = this.countriesList[this.singleNumber];
+    this.currentCountry = this.countriesList[this.serviceCountry.getSingleRandomNumber()];
   }
 
-  handleCount() {
-    this.count++
-  } 
+
+/* validate if user selected answer */
+  addNewQuiz(n:boolean) {
+    this.countSelect++;
+      if(n) {
+        this.correctAnswer++;
+      }
+  }
+ 
+  tryAgain() {
+    this.countAnswer = 1;
+    this.correctAnswer = 0;
+    this.countSelect = 0;
+    this.countriesList = [];
+    this.getCountriesByRandomNumber();
+  }
 
   handleNextQuiz() {
     this.countriesList = [];
-    this.randomNumbers = this.serviceCountry.generateRandomNumbers();
-    this.singleNumber = this.serviceCountry.getSingleRandomNumber();
     this.getCountriesByRandomNumber();
-    this.count = 0;
+    this.currentQuiz = this.arrQuiz[Math.floor(Math.random() * 2)];
+    this.countSelect = 0;
+    this.handleFinishQuiz();
+  }
+
+  handleFinishQuiz() {
+    this.countAnswer++;
   }
   
 }

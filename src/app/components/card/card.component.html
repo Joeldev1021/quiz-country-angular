@@ -1,10 +1,23 @@
 <div class="card">
-    <h2>kuala lumpur is the capital of</h2>
-    <ul class="list">
-        <button (click)="onSelect()">A <span>vietnam</span></button>
-        <button>B <span>Malaysia</span></button>
-        <button>C <span>sweden</span></button>
-        <button>D <span>Austria</span></button>
+  <p class="title">Country Quiz</p>
+  <img class="card-img" src="assets/undraw1.svg" alt="aventure" />
+  <div *ngIf="countAnswer < 10" class="card-content">
+    <div class="card-question">
+      <img *ngIf="currentQuiz.includes('belong')" class="card-flag" src="{{ currentCountry.flag }}" alt="{{currentCountry.name}}" />
+      <p>{{currentQuiz.includes('capital')? currentCountry.name: ""}} {{ currentQuiz }}</p>
+    </div>
+    <ul>
+      <app-list-item
+        [listItem]="item"
+        (addNewQuizEvent)="addNewQuiz($event)"
+        [index]="i"
+        [countSelect]="countSelect"
+        [correctAnswer]="correctAnswer"
+        [currentCountry]="currentCountry"
+        *ngFor="let item of countriesList; index as i"
+      ></app-list-item>
     </ul>
- </div>
-
+    <button *ngIf="countSelect > 0" class="btn-next" (click)="handleNextQuiz()">next</button>
+  </div>
+  <app-card-finish *ngIf="countAnswer === 10" (tryAgain)="tryAgain()" [correctAnswer]="correctAnswer" [countAnswer]="countAnswer"></app-card-finish> 
+</div>
